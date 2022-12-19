@@ -35,6 +35,7 @@ def trayIcon(windowName):
 
 def drawSettingsMenu():
   layout = [[ui.Checkbox('Keep On Top', ui.user_settings_get_entry('-keepOnTop-', False), key='-userKeepOnTopCB-', enable_events=True)],
+            [ui.Checkbox('Taskbar Icon Hides Window', ui.user_settings_get_entry('-iconHidesWindow-', True), key='-userIconHidesWindowCB-', enable_events=True)],
             [ui.Button('Save', border_width=0, button_color='#404040', mouseover_colors='#404040')]]
 
   return ui.Window('Music Player Settings', layout, size=(400, 300), use_custom_titlebar=True, keep_on_top=True,
@@ -182,6 +183,8 @@ if __name__ == "__main__":
     if event == 'Play':
       if firstTimePlaying is True:
         mixer.init()
+        if windows == window:
+          changeVolume(float(values['volume'] / 100))
         if isShuffleEnabled is True:
           songDuration = randomSong(songNum, shuffleList)
         else:
@@ -204,6 +207,8 @@ if __name__ == "__main__":
     if event == 'Previous':
       if firstTimePlaying is True:
         mixer.init()
+        if windows == window:
+          changeVolume(float(values['volume'] / 100))
         firstTimePlaying = False
         window['Play'].update(image_data=pauseButton)
       if isRepeatEnabled is True:
@@ -224,6 +229,8 @@ if __name__ == "__main__":
     if event == 'Next':
       if firstTimePlaying is True:
         mixer.init()
+        if windows == window:
+          changeVolume(float(values['volume'] / 100))
         if isShuffleEnabled is True:
           songDuration = randomSong(songNum, shuffleList)
         else:
@@ -290,17 +297,22 @@ if __name__ == "__main__":
         settingsWindow = drawSettingsMenu()
     if event == tray.key:
       event = values[event]
-    if event in (ui.TITLEBAR_MINIMIZE_KEY, 'Minimize') or event in (
-    '__ACTIVATED__', ui.EVENT_SYSTEM_TRAY_ICON_ACTIVATED):
+    if event in ('__ACTIVATED__', ui.EVENT_SYSTEM_TRAY_ICON_ACTIVATED):
       if windowShown is False:
         window.un_hide()
         window.bring_to_front()
         windowShown = True
       else:
-        window.hide()
-        tray.show_icon()
-        windowShown = False
+        if iconHidesWindow is True:
+          window.hide()
+          tray.show_icon()
+          windowShown = False
+        else:
+          window.un_hide()
+          window.bring_to_front()
+          windowShown = True
     keepOnTop = ui.user_settings_get_entry('-keepOnTop-', False)
+    iconHidesWindow = ui.user_settings_get_entry('-iconHidesWindow-', True)
     if keepOnTop is True:
       window.keep_on_top_set()
     else:
@@ -314,6 +326,7 @@ if __name__ == "__main__":
           settingsWindow = None
         if event == 'Save':
           ui.user_settings_set_entry('-keepOnTop-', values['-userKeepOnTopCB-'])
+          ui.user_settings_set_entry('-iconHidesWindow-', values['-userIconHidesWindowCB-'])
           settingsWindow.close()
           tray = trayIcon(window)
           settingsWindow = None
