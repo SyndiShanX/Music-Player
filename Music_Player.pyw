@@ -66,8 +66,7 @@ def loadSongs(dirName):
   FilesList = os.listdir(str(dirName))
   return [file for file in FilesList if file.endswith('.mp3')]
 
-def draggedSong():
-  currentSong = sys.argv[1]
+def draggedSong(currentSong):
   setArtwork(str(currentSong))
   mixer.music.load(str(currentSong))
   mixer.music.play()
@@ -159,11 +158,15 @@ if __name__ == "__main__":
       if event in (ui.WIN_CLOSED, 'Exit'):
         tray.close()
         break
-    if firstTimePlaying is True and sys.argv[1] is not None:
+    if firstTimePlaying is True:
+      if sys.argv[0] is not None or sys.argv[1] is not None:
         mixer.init()
         if windows == window:
           changeVolume(float(values['volume'] / 100))
-        songDuration = draggedSong()
+        if sys.argv[0] is not None:
+          songDuration = draggedSong(sys.argv[0])
+        elif sys.argv[1] is not None:
+          songDuration = draggedSong(sys.argv[1])
         firstTimePlaying = False
         isSongPlaying = True
         isSongPaused = False
