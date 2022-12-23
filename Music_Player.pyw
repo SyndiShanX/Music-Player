@@ -37,6 +37,7 @@ def trayIcon(windowName):
 def drawSettingsMenu():
   layout = [[ui.Checkbox('Keep On Top', ui.user_settings_get_entry('-keepOnTop-', False), key='-userKeepOnTopCB-', enable_events=True)],
             [ui.Checkbox('Taskbar Icon Hides Window', ui.user_settings_get_entry('-iconHidesWindow-', True), key='-userIconHidesWindowCB-', enable_events=True)],
+            [ui.Text('Songs Folder:'), ui.Input(ui.user_settings_get_entry('-songsDir-', fileDir + 'Songs'), enable_events=True, key='-userSongsDirInput-')],
             [ui.Button('Save', border_width=0, button_color='#404040', mouseover_colors='#404040')]]
 
   return ui.Window('Music Player Settings', layout, size=(400, 300), use_custom_titlebar=True, keep_on_top=True,
@@ -76,7 +77,7 @@ def draggedSong():
   return songLength
 
 def randomSong(currentShuffleIndex, shuffleIndex):
-  currentSong = 'Songs\\' + SongsXML[shuffleIndex[currentShuffleIndex]]
+  currentSong = songsFolder + SongsXML[shuffleIndex[currentShuffleIndex]]
 # print('Playing #' + str(shuffleIndex[currentShuffleIndex]) + ' - ' + currentSong)
   setArtwork(fileDir + str(currentSong))
   mixer.music.load(str(currentSong))
@@ -86,9 +87,9 @@ def randomSong(currentShuffleIndex, shuffleIndex):
 def linearSong(currentSongNum):
   songCount = len(SongsXML)
   if songCount == 1 or currentSongNum == songCount:
-    currentSong = 'Songs\\' + SongsXML[0]
+    currentSong = songsFolder + SongsXML[0]
   else:
-    currentSong = 'Songs\\' + SongsXML[currentSongNum]
+    currentSong = songsFolder + SongsXML[currentSongNum]
 # print('Playing #' + str(currentSongNum) + ' - ' + currentSong)
   setArtwork(fileDir + str(currentSong))
   mixer.music.load(str(currentSong))
@@ -119,7 +120,7 @@ def convert(seconds):
   return total
 
 def getSongDuration(currentSongNum):
-  songLength = int(mixer.Sound(str('Songs\\' + SongsXML[currentSongNum])).get_length()) * 1000
+  songLength = int(mixer.Sound(str(songsFolder + SongsXML[currentSongNum])).get_length()) * 1000
   window['totalSongDuration'].update(str(convert(round(songLength / 1000))))
   return songLength
 
@@ -137,11 +138,13 @@ def checkIsSongPlaying():
   else:
     return True
 
-SongsXML = loadSongs('Songs')
+songsFolder = 'Songs\\'
+songsDir = fileDir + songsFolder
 songNum = 0
 songDuration = 0
 shuffleList = []
 firstTimePlaying = True
+isDraggableSong = False
 isSongPlaying = False
 isSongPaused = True
 isShuffleEnabled = False
@@ -159,15 +162,21 @@ if __name__ == "__main__":
       if event in (ui.WIN_CLOSED, 'Exit'):
         tray.close()
         break
-    if firstTimePlaying is True and sys.argv[1] is not None:
+    if firstTimePlaying is True:
+      if len(sys.argv) >= 2:
+        SongsXML = loadSongs(fileDir)
+        songsFolder = ''
         mixer.init()
         if windows == window:
           changeVolume(float(values['volume'] / 100))
         songDuration = draggedSong()
         firstTimePlaying = False
+        isDraggableSong = True
         isSongPlaying = True
         isSongPaused = False
         window['Play'].update(image_data=pauseButton)
+      else:
+        SongsXML = loadSongs(songsDir)
     if isSongPaused is False:
       window['Play'].update(image_data=pauseButton)
     else:
@@ -209,6 +218,7 @@ if __name__ == "__main__":
         else:
           songDuration = linearSong(0)
         firstTimePlaying = False
+        isDraggableSong = False
         isSongPlaying = True
         isSongPaused = False
         window['Play'].update(image_data=pauseButton)
@@ -242,6 +252,7 @@ if __name__ == "__main__":
           songDuration = linearSong(songNum)
         else:
           songDuration = linearSong(songNum)
+      isDraggableSong = False
       isSongPlaying = True
       isSongPaused = False
       progressBar(songDuration)
@@ -271,6 +282,7 @@ if __name__ == "__main__":
           songDuration = linearSong(songNum)
         else:
           songDuration = linearSong(songNum)
+      isDraggableSong = False
       isSongPlaying = True
       isSongPaused = False
       progressBar(songDuration)
@@ -332,6 +344,9 @@ if __name__ == "__main__":
           windowShown = True
     keepOnTop = ui.user_settings_get_entry('-keepOnTop-', False)
     iconHidesWindow = ui.user_settings_get_entry('-iconHidesWindow-', True)
+    songsDir = ui.user_settings_get_entry('-songsDir-', fileDir + 'Songs')
+    if songsDir != fileDir + 'Songs' and isDraggableSong is not True:
+      SongsXML = loadSongs(songsDir)
     if keepOnTop is True:
       window.keep_on_top_set()
     else:
@@ -346,6 +361,7 @@ if __name__ == "__main__":
         if event == 'Save':
           ui.user_settings_set_entry('-keepOnTop-', values['-userKeepOnTopCB-'])
           ui.user_settings_set_entry('-iconHidesWindow-', values['-userIconHidesWindowCB-'])
+          ui.user_settings_set_entry('-songsDir-', values['-userSongsDirInput-'])
           settingsWindow.close()
           tray = trayIcon(window)
           settingsWindow = None
