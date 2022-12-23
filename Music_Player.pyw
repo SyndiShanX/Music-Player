@@ -6,6 +6,7 @@ from PIL import Image
 import random
 import base64
 import eyed3
+import sys
 import os
 
 fileDir = os.getcwd()
@@ -64,6 +65,15 @@ def drawMusicPlayer():
 def loadSongs(dirName):
   FilesList = os.listdir(str(dirName))
   return [file for file in FilesList if file.endswith('.mp3')]
+
+def draggedSong():
+  currentSong = sys.argv[1]
+  setArtwork(str(currentSong))
+  mixer.music.load(str(currentSong))
+  mixer.music.play()
+  songLength = int(mixer.Sound(str(currentSong)).get_length()) * 1000
+  window['totalSongDuration'].update(str(convert(round(songLength / 1000))))
+  return songLength
 
 def randomSong(currentShuffleIndex, shuffleIndex):
   currentSong = 'Songs\\' + SongsXML[shuffleIndex[currentShuffleIndex]]
@@ -149,6 +159,15 @@ if __name__ == "__main__":
       if event in (ui.WIN_CLOSED, 'Exit'):
         tray.close()
         break
+    if firstTimePlaying is True and sys.argv[1] is not None:
+        mixer.init()
+        if windows == window:
+          changeVolume(float(values['volume'] / 100))
+        songDuration = draggedSong()
+        firstTimePlaying = False
+        isSongPlaying = True
+        isSongPaused = False
+        window['Play'].update(image_data=pauseButton)
     if isSongPaused is False:
       window['Play'].update(image_data=pauseButton)
     else:
