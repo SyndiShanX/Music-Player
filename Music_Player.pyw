@@ -78,7 +78,7 @@ def draggedSong():
 def randomSong(currentShuffleIndex, shuffleIndex):
   currentSong = 'Songs\\' + SongsXML[shuffleIndex[currentShuffleIndex]]
 # print('Playing #' + str(shuffleIndex[currentShuffleIndex]) + ' - ' + currentSong)
-  setArtwork(str(currentSong))
+  setArtwork(fileDir + str(currentSong))
   mixer.music.load(str(currentSong))
   mixer.music.play()
   return getSongDuration(shuffleIndex[currentShuffleIndex])
@@ -90,13 +90,13 @@ def linearSong(currentSongNum):
   else:
     currentSong = 'Songs\\' + SongsXML[currentSongNum]
 # print('Playing #' + str(currentSongNum) + ' - ' + currentSong)
-  setArtwork(str(currentSong))
+  setArtwork(fileDir + str(currentSong))
   mixer.music.load(str(currentSong))
   mixer.music.play()
   return getSongDuration(currentSongNum)
 
 def setArtwork(currentSong):
-  song = eyed3.load(fileDir + currentSong.replace('\\', '/'))
+  song = eyed3.load(currentSong.replace('\\', '/'))
   for image in song.tag.images:
     artwork = BytesIO()
     Image.open(BytesIO(image.image_data)).resize((128, 128)).save(artwork, format="PNG")
