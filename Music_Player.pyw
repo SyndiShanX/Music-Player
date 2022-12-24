@@ -46,8 +46,10 @@ def drawSettingsMenu():
 
 def drawMusicPlayer():
   userKeepOnTop = ui.user_settings_get_entry('-keepOnTop-', False)
+  userVolume = ui.user_settings_get_entry('-volume-', 0.5)
+  userVolume = userVolume * 100
   layout = [[ui.Image(source=defaultArtwork, size=(128, 128), pad=((100, 0), (0, 0)), key='Artwork'),
-             ui.Slider(range=(0, 100), default_value=50, resolution=1, key='volume', enable_events=True, orientation='v', size=(7, 5)),
+             ui.Slider(range=(0, 100), default_value=userVolume, resolution=1, key='volume', enable_events=True, orientation='v', size=(7, 5)),
              ui.Button(key='Settings', image_data=settingsButton, pad=((50, 0), (0, 100)), border_width=0, button_color='#404040', mouseover_colors='#404040')],
             [ui.Text('0:00', key='currentSongDuration', auto_size_text=True),
              ui.ProgressBar(1, orientation='h', size=(20, 5), bar_color=('#ffffff', '#5C5C5C'), pad=(0, 5), key='progress'),
@@ -130,7 +132,10 @@ def progressBar(songLength):
   window['currentSongDuration'].update(str(convert(round(currentTime / 1000))))
 
 def changeVolume(volumeNum):
+  if values['volume'] == 0.0:
+    volumeNum = 0.0
   mixer.music.set_volume(volumeNum)
+  ui.user_settings_set_entry('-volume-', float(values['volume'] / 100))
 
 def checkIsSongPlaying():
   if mixer.music.get_busy() is not True:
@@ -160,6 +165,7 @@ if __name__ == "__main__":
     keepOnTop = ui.user_settings_get_entry('-keepOnTop-', False)
     iconHidesWindow = ui.user_settings_get_entry('-iconHidesWindow-', True)
     songsDir = ui.user_settings_get_entry('-songsDir-', fileDir)
+    volume = ui.user_settings_get_entry('-volume-', 0.5)
     if songsDir[-1] != '/':
       songsDir = songsDir + '/'
 
@@ -172,7 +178,7 @@ if __name__ == "__main__":
         SongsXML = loadSongs(fileDir)
         mixer.init()
         if windows == window:
-          changeVolume(float(values['volume'] / 100))
+          changeVolume(volume)
         songDuration = draggedSong()
         firstTimePlaying = False
         isDraggableSong = True
@@ -187,7 +193,7 @@ if __name__ == "__main__":
       window['Play'].update(image_data=playButton)
     if isSongPlaying is True:
       if windows == window:
-        changeVolume(float(values['volume'] / 100))
+        changeVolume(volume)
       isSongPlaying = checkIsSongPlaying()
     elif isSongPlaying is False and firstTimePlaying is False and isSongPaused is False:
       if isRepeatEnabled is True and isShuffleEnabled is True or isRepeatEnabled is True and isShuffleEnabled is False:
@@ -216,7 +222,7 @@ if __name__ == "__main__":
       if firstTimePlaying is True:
         mixer.init()
         if windows == window:
-          changeVolume(float(values['volume'] / 100))
+          changeVolume(volume)
         if isShuffleEnabled is True:
           songDuration = randomSong(songNum, shuffleList)
         else:
@@ -241,7 +247,7 @@ if __name__ == "__main__":
       if firstTimePlaying is True:
         mixer.init()
         if windows == window:
-          changeVolume(float(values['volume'] / 100))
+          changeVolume(volume)
         firstTimePlaying = False
         window['Play'].update(image_data=pauseButton)
       if isRepeatEnabled is True:
@@ -264,7 +270,7 @@ if __name__ == "__main__":
       if firstTimePlaying is True:
         mixer.init()
         if windows == window:
-          changeVolume(float(values['volume'] / 100))
+          changeVolume(volume)
         if isShuffleEnabled is True:
           songDuration = randomSong(songNum, shuffleList)
         else:
@@ -363,6 +369,7 @@ if __name__ == "__main__":
           ui.user_settings_set_entry('-keepOnTop-', values['-userKeepOnTopCB-'])
           ui.user_settings_set_entry('-iconHidesWindow-', values['-userIconHidesWindowCB-'])
           ui.user_settings_set_entry('-songsDir-', values['-userSongsDirInput-'])
+          ui.user_settings_set_entry('-volume-', float(values['volume'] / 100))
           settingsWindow.close()
           tray = trayIcon(window)
           settingsWindow = None
