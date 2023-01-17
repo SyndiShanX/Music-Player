@@ -369,7 +369,7 @@ if __name__ == "__main__":
           ui.user_settings_set_entry('-keepOnTop-', values['-userKeepOnTopCB-'])
           ui.user_settings_set_entry('-iconHidesWindow-', values['-userIconHidesWindowCB-'])
           ui.user_settings_set_entry('-songsDir-', values['-userSongsDirInput-'])
-          ui.user_settings_set_entry('-volume-', float(values['volume'] / 100))
+          ui.user_settings_set_entry('-volume-', volume)
           settingsWindow.close()
           tray = trayIcon(window)
           settingsWindow = None
