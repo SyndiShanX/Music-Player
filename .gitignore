@@ -3,3 +3,4 @@
 *.ico
 build_env/*
 Songs/*
+Link_Songs.py
