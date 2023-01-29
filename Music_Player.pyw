@@ -82,7 +82,11 @@ def trackStats(totalTime, endSongDuration):
   songTime = mixer.music.get_pos()
   if songTime == -1:
     songTime = endSongDuration
-  ui.user_settings_set_entry('-time-', totalTime + songTime / 1000)
+  songTime = songTime + totalTime
+  songTimeMins = songTime / 1000
+  songTimeHours = songTime / 1000 / 3600
+  ui.user_settings_set_entry('-timeHours-', round(songTimeHours, 3))
+  ui.user_settings_set_entry('-timeMins-', round(songTimeMins, 3))
 
 def randomSong(currentShuffleIndex, shuffleIndex):
   currentSong = songsDir + SongsXML[shuffleIndex[currentShuffleIndex]]
@@ -151,7 +155,7 @@ def checkIsSongPlaying():
 
 songsDir = fileDir
 songNum = 0
-listenTime = 0
+listenTimeCurrent = 0
 songDuration = 0
 shuffleList = []
 firstTimePlaying = True
@@ -173,7 +177,7 @@ if __name__ == "__main__":
     iconHidesWindow = ui.user_settings_get_entry('-iconHidesWindow-', True)
     songsDir = ui.user_settings_get_entry('-songsDir-', fileDir)
     volume = ui.user_settings_get_entry('-volume-', 0.5)
-    listenTime = ui.user_settings_get_entry('-time-', 0)
+    listenTimeCurrent = ui.user_settings_get_entry(float('-timeMins-') * 1000, 0)
     if songsDir[-1] != '/':
       songsDir = songsDir + '/'
 
@@ -204,7 +208,7 @@ if __name__ == "__main__":
         changeVolume(volume)
       isSongPlaying = checkIsSongPlaying()
     elif isSongPlaying is False and firstTimePlaying is False and isSongPaused is False:
-      trackStats(listenTime, songDuration)
+      trackStats(listenTimeCurrent, songDuration)
       if isRepeatEnabled is True and isShuffleEnabled is True or isRepeatEnabled is True and isShuffleEnabled is False:
         songDuration = linearSong(songNum)
         isSongPlaying = True
@@ -260,7 +264,7 @@ if __name__ == "__main__":
         firstTimePlaying = False
         window['Play'].update(image_data=pauseButton)
       else:
-        trackStats(listenTime, 0)
+        trackStats(listenTimeCurrent, 0)
       if isRepeatEnabled is True:
         songDuration = linearSong(songNum)
       elif isRepeatEnabled is False and isShuffleEnabled is True:
@@ -289,7 +293,7 @@ if __name__ == "__main__":
         firstTimePlaying = False
         window['Play'].update(image_data=pauseButton)
       else:
-        trackStats(listenTime, 0)
+        trackStats(listenTimeCurrent, 0)
       if isRepeatEnabled is True and isShuffleEnabled is True or isRepeatEnabled is True and isShuffleEnabled is False:
         songDuration = linearSong(songNum)
       elif isRepeatEnabled is False and isShuffleEnabled is True:
