@@ -27,6 +27,8 @@ shuffleEnabledButton = b'iVBORw0KGgoAAAANSUhEUgAAABQAAAAdCAYAAACqhkzFAAAAAXNSR0I
 repeatButton = b'iVBORw0KGgoAAAANSUhEUgAAABQAAAAdCAYAAACqhkzFAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFtSURBVEhL7ZQxToRAFIYHSrYhmm2WBGgoPYNbEiuvoAUkJpzAzhgvQAMkJl7AHmOz3mFjsVSQ0JFQiVbi+2cHgxgSdqHkS8h7/DPzMzO8GYm18H3/mcIFPTI939BasY9Xz/MuRc64IRk9WpZ1zZUjSZLkiYyvJDJzyCwsioKVZXlLbcW+C6e9glrEhqbtRFXVh+VyCVMXhh9kqNi2/Wf5hxLHcU2GlaxpmiK00axWK0VeLBbidRyYHbzwNydFruvuXo9j+hmKOBnTG1ZVJdJhBEFQU+1uxOsvKD94yXmeD3aEmWmaSE+50AIlQ15fWPI9BHRG7KMxS9OU0Zk9EzLuATcMQyoWPvyuuRw2dPzOJUliTRnhXNLACDkGGIbB9T6o/xv1X/OfgoSEm91ut8UMuuBDXaBlWQajrfj4muu8dQBRFNW6rvMlu67bO25w2TiOI2FG2Efaok8h/+OgOoQpbcs7pS97ZWZm5hgY+wFCkpSvSHtiPAAAAABJRU5ErkJggg=='
 repeatEnabledButton = b'iVBORw0KGgoAAAANSUhEUgAAABQAAAAdCAYAAACqhkzFAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHqSURBVEhLY2RAAubTji36ycDoBGTCxP9DaZyAg+Hf/hNZ1rFQLkSj5fQjk/5IqOWCRcgELC9uTT6eaZPH6DrjQPwHca0Fv988ZRD487mYlfHf238MDP+YGBiYGBn+AykI+M/ACBRGAJjcr//Mgh9YeHtZRaQZBF5eS2DUn3biKZukktTpQDEU75MKTNe/+v/r+b1nTMz8olJQMYoBM7+IFBMzFy+USxkAuY6Zi48BHkbUAqMGUg6Y/n77DGUSB4Dp9qvJ9GOboFw4ACU/kFlMfz++fgYVIwhAhgEzAde//4yCUCE4ACU/kFlMAoy/ukECIMVgGRwAZtivZ/e+n8uytIUKM7jN2J8I0yvI+KsXnN1AXmCUUPEFsWEAlC93ZzgsBLFhhoElcID/L+5sPpNp5QeOFBBD+OXV5L/P7x4BuQCsAhkASwYoCwWA1IL0gCwHmQESI7pA0J964hublBInMIt9u5hlwQ0VxgBEJ5uL2Rbg8AN53WDa8SdQYQxAUjoEGfrvxZ1jbIz/9kGFRsFQAATTISwX/X7zhIH5z49NZzOt/KFSWAHeZOMw/VARLEuyisgwMEmogHMDPoDXwJ8MTApQJhyYTj8Kzt+4AEEvg+pbKBMMCNXfBHMKqIkBalWAMKhEgQrjAAwMAN7+vKxa8RqDAAAAAElFTkSuQmCC'
 settingsButton = b'iVBORw0KGgoAAAANSUhEUgAAABEAAAARCAYAAAA7bUf6AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAADwSURBVDhPlZPRFYMgDEU5LqI7dY8u4wC6iTqBOoE6gf76Rfvii5bIacv9ISQhkAe4bwzD4EHf956u35Rl+aAJ+ykVCOYMBXkBdV1LMnatqsqv6ypzBXP4EQewufQAlSWSyO1E2v+/IJ9LXcYRRWhdLMviuq6T0XLLh2hWA2jEsKCaKcg/xY61Mc9z9Erht8j10w5o2zZaBP4Y2TiOTLnI85xWSFEUtC7O9eht2zbWPbDvwGqC/FMTxSaBaZp80zQyWqzwQuo7uf0nvDzGksA6ljjQdnCid3C3GlGDXU8cbQd8Vn7b6b84hu6Kka4Izr0AwrNgkgJ1QI4AAAAASUVORK5CYII='
+pinButton = b'iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFSSURBVDhPpZIxaoRAFIZn18JCELYQJJDGwl0SrFOuuYCJN1my51iSNqcwWFqZyhMoiQcIgoVgZ7GY/8nMoutEd8kP43u+cb55zvzsGgVB8MrTkZY8zgqQVNO0HWLMSwNdDFqtVneWZVFqy2AXg1RV5Rl7pMc5bMHjpMIwbA3DYGVZMs/zujUC5Pu+S3EWJIMI9WEjECafEGiXWFGUjwnIC8Itzm5XVdXbaZImUDzous5oCGVZJoWYpnlomoYBkqGjez6F7eO4TdO0jaKo5SXR3UAEod/lr2Phg3WSJB0MudQrsxChKdgcZOAj/Ot3URSbPM/3juNsz2APx+PxmecjyQz5jtvqDtK27T7sB6PzjEwDEC0CZIudP9HVpq7rPuwGQ3p2pP71nyDCraitcc1fZAfykuuOfSfUdSSDkMSZEQR+2fOyVIu/INdqCTf/G8IYY7/Pn9JHREbniwAAAABJRU5ErkJggg=='
+pinEnabledButton = b'iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEhSURBVDhPpZM9ioNQEIDfxsJOsBAs7De4eIZ4AhOvknssu21OYfAEL5UHkMgu2NgJFoKdhbgzu6PwzGjM5gOZ5xTfc34UjxBF0Qcd/w9Irnme9xAlpRQ2FO9imqaL0fO8HSdbLdJ1nU68bJUojuPesix6+2Mqe6E4C0pc97cqljRNL2EY+jciuGUPwYdHapp2XpIMgOxzFIHgCA19dxyHMstUVSXathV1XWfwRW+jSErZr5VkWSaCIFCqGZsN5i3ecg9OgigJKO/Vtu2v6YQG5iSIMn6o9bssy23TNJRR6bruQMcbuD06GYYhZmQ4TRZFhAuGi4a7URQF1zP2P1NAyfSnxJ4lSdJjHqdK6Xk4yQDKUALxSCmeJclD0G3PSYQQPybroMr2rebPAAAAAElFTkSuQmCC'
 defaultArtwork = b'iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADr8AAA6/ATgFUyQAAAHpSURBVHhe7dpBasNAEARAJx9MHmK/xn5I8sNA0GkICBN5NbtddbGOWmhm2qwuAAAAAAAAAAAAwBLett/T3O/3r+3xT7fb7XN7nFL3871vv4QSgHACEG54B6g78Xq9fmyPf3o8Ht/b46/unWC285kA4QQgnACEe3kHeHYn7unWCWY/nwkQTgDCCUC4wzvA0Ttxz+idudr5TIBwAhBOAMJN3wGqo3fmauepTIBwAhBOAMJNdxfwrGd36Oo7vzIBwglAOAEI1/6bwKPVHVutvvMrEyCcAIQTgHDDO0B1dicY7eydX5kA4QQgnACEO70DVKt1gm47vzIBwglAOAEI164DVLN1gu47vzIBwglAOAEI174DVN06wWw7vzIBwglAOAEIJwDhBCCcAIQTgHDuAg7mLoCpCEA4AQjnm8AX800grQlAOAEId3oHWG3n7+nWCUyAcAIQTgDCDe8AZ+/8uoOrs99ndCcwAcIJQDgBCPfyDtBt5+/t2Nne979MgHACEE4Awh3eAVbboat3AhMgnACEE4Bw03eA0f+bVzufCRBOAMIJQLjp7gJG7/w9s5/PBAgnAOEEIFz7bwK77fw9s53PBAgnAOEEINzwDlDVnVl13/l7up/PBAgnAOEEAAAAAAAAAAAAAGB6l8sP3YUAq8Y3nBIAAAAASUVORK5CYII='
 
 def trayIcon(windowName):
@@ -48,9 +50,11 @@ def drawMusicPlayer():
   userKeepOnTop = ui.user_settings_get_entry('-keepOnTop-', False)
   userVolume = ui.user_settings_get_entry('-volume-', 0.5)
   userVolume = userVolume * 100
+  sideButtons = [[ui.Button(key='Settings', image_data=settingsButton, pad=0, border_width=0, button_color='#404040', mouseover_colors='#404040')],
+                 [ui.Button(key='Pin', image_data=pinButton, pad=((0, 0), (8, 0)), border_width=0, button_color='#404040', mouseover_colors='#404040')]]
   layout = [[ui.Image(source=defaultArtwork, size=(128, 128), pad=((100, 0), (0, 0)), key='Artwork'),
              ui.Slider(range=(0, 100), default_value=userVolume, resolution=1, key='volume', enable_events=True, orientation='v', size=(7, 5)),
-             ui.Button(key='Settings', image_data=settingsButton, pad=((50, 0), (0, 100)), border_width=0, button_color='#404040', mouseover_colors='#404040')],
+             ui.Column(sideButtons, pad=((50, 0), (0, 100)), size=(20, 48))],
             [ui.Text('0:00', key='currentSongDuration', auto_size_text=True),
              ui.ProgressBar(1, orientation='h', size=(20, 5), bar_color=('#ffffff', '#5C5C5C'), pad=(0, 5), key='progress'),
              ui.Text('0:00', key='totalSongDuration', auto_size_text=True)],
@@ -170,14 +174,14 @@ settingsWindow = None
 if __name__ == "__main__":
   window = drawMusicPlayer()
   tray = trayIcon(window)
+  keepOnTop = ui.user_settings_get_entry('-keepOnTop-', False)
+  iconHidesWindow = ui.user_settings_get_entry('-iconHidesWindow-', True)
+  songsDir = ui.user_settings_get_entry('-songsDir-', fileDir)
+  volume = ui.user_settings_get_entry('-volume-', 0.5)
+  listenTimeCurrent = float(ui.user_settings_get_entry('-timeMins-', 0)) * 1000
   while True:
     windows, event, values = ui.read_all_windows(timeout=1000)
 
-    keepOnTop = ui.user_settings_get_entry('-keepOnTop-', False)
-    iconHidesWindow = ui.user_settings_get_entry('-iconHidesWindow-', True)
-    songsDir = ui.user_settings_get_entry('-songsDir-', fileDir)
-    volume = ui.user_settings_get_entry('-volume-', 0.5)
-    listenTimeCurrent = ui.user_settings_get_entry(float('-timeMins-') * 1000, 0)
     if songsDir[-1] != '/':
       songsDir = songsDir + '/'
 
@@ -185,6 +189,16 @@ if __name__ == "__main__":
       if event in (ui.WIN_CLOSED, 'Exit'):
         tray.close()
         break
+    if event == 'Pin':
+      print(keepOnTop)
+      if keepOnTop is False:
+        keepOnTop = True
+        window['Pin'].update(image_data=pinEnabledButton)
+        window.TKroot.wm_attributes("-topmost", keepOnTop)
+      else:
+        keepOnTop = False
+        window['Pin'].update(image_data=pinButton)
+        window.TKroot.wm_attributes("-topmost", keepOnTop)
     if firstTimePlaying is True:
       if len(sys.argv) >= 2:
         SongsXML = loadSongs(fileDir)
