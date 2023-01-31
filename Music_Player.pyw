@@ -179,25 +179,29 @@ if __name__ == "__main__":
   songsDir = ui.user_settings_get_entry('-songsDir-', fileDir)
   volume = ui.user_settings_get_entry('-volume-', 0.5)
   listenTimeCurrent = float(ui.user_settings_get_entry('-timeMins-', 0)) * 1000
+  if keepOnTop is False:
+    window['Pin'].update(image_data=pinEnabledButton)
+  else:
+    window['Pin'].update(image_data=pinButton)
   while True:
     windows, event, values = ui.read_all_windows(timeout=1000)
 
     if songsDir[-1] != '/':
       songsDir = songsDir + '/'
-
     if windows == window:
       if event in (ui.WIN_CLOSED, 'Exit'):
         tray.close()
         break
     if event == 'Pin':
-      print(keepOnTop)
       if keepOnTop is False:
         keepOnTop = True
         window['Pin'].update(image_data=pinEnabledButton)
+        ui.user_settings_set_entry('-keepOnTop-', keepOnTop)
         window.TKroot.wm_attributes("-topmost", keepOnTop)
       else:
         keepOnTop = False
         window['Pin'].update(image_data=pinButton)
+        ui.user_settings_set_entry('-keepOnTop-', keepOnTop)
         window.TKroot.wm_attributes("-topmost", keepOnTop)
     if firstTimePlaying is True:
       if len(sys.argv) >= 2:
