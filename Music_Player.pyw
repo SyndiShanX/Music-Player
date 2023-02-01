@@ -177,7 +177,6 @@ if __name__ == "__main__":
   keepOnTop = ui.user_settings_get_entry('-keepOnTop-', False)
   iconHidesWindow = ui.user_settings_get_entry('-iconHidesWindow-', True)
   songsDir = ui.user_settings_get_entry('-songsDir-', fileDir)
-  volume = ui.user_settings_get_entry('-volume-', 0.5)
   listenTimeCurrent = float(ui.user_settings_get_entry('-timeMins-', 0)) * 1000
   if keepOnTop is False:
     window['Pin'].update(image_data=pinEnabledButton)
@@ -185,6 +184,8 @@ if __name__ == "__main__":
     window['Pin'].update(image_data=pinButton)
   while True:
     windows, event, values = ui.read_all_windows(timeout=1000)
+
+    volume = ui.user_settings_get_entry('-volume-', 0.5)
 
     if songsDir[-1] != '/':
       songsDir = songsDir + '/'
@@ -264,6 +265,8 @@ if __name__ == "__main__":
         isSongPaused = False
         window['Play'].update(image_data=pauseButton)
       else:
+        if windows == window:
+          changeVolume(volume)
         if isSongPlaying is True:
           mixer.music.pause()
           isSongPlaying = False
@@ -282,6 +285,8 @@ if __name__ == "__main__":
         firstTimePlaying = False
         window['Play'].update(image_data=pauseButton)
       else:
+        if windows == window:
+          changeVolume(volume)
         trackStats(listenTimeCurrent, 0)
       if isRepeatEnabled is True:
         songDuration = linearSong(songNum)
@@ -311,6 +316,8 @@ if __name__ == "__main__":
         firstTimePlaying = False
         window['Play'].update(image_data=pauseButton)
       else:
+        if windows == window:
+          changeVolume(volume)
         trackStats(listenTimeCurrent, 0)
       if isRepeatEnabled is True and isShuffleEnabled is True or isRepeatEnabled is True and isShuffleEnabled is False:
         songDuration = linearSong(songNum)
