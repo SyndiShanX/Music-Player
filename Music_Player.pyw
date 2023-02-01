@@ -87,7 +87,7 @@ def trackStats(totalTime, endSongDuration):
   if songTime == -1:
     songTime = endSongDuration
   songTime = songTime + totalTime
-  songTimeMins = songTime / 1000
+  songTimeMins = songTime / 1000 / 60
   songTimeHours = songTime / 1000 / 3600
   ui.user_settings_set_entry('-timeHours-', round(songTimeHours, 3))
   ui.user_settings_set_entry('-timeMins-', round(songTimeMins, 3))
@@ -177,7 +177,6 @@ if __name__ == "__main__":
   keepOnTop = ui.user_settings_get_entry('-keepOnTop-', False)
   iconHidesWindow = ui.user_settings_get_entry('-iconHidesWindow-', True)
   songsDir = ui.user_settings_get_entry('-songsDir-', fileDir)
-  listenTimeCurrent = float(ui.user_settings_get_entry('-timeMins-', 0)) * 1000
   if keepOnTop is False:
     window['Pin'].update(image_data=pinEnabledButton)
   else:
@@ -186,6 +185,7 @@ if __name__ == "__main__":
     windows, event, values = ui.read_all_windows(timeout=1000)
 
     volume = ui.user_settings_get_entry('-volume-', 0.5)
+    listenTimeCurrent = float(ui.user_settings_get_entry('-timeMins-', 0)) * 60 * 1000
 
     if songsDir[-1] != '/':
       songsDir = songsDir + '/'
