@@ -177,10 +177,6 @@ if __name__ == "__main__":
   keepOnTop = ui.user_settings_get_entry('-keepOnTop-', False)
   iconHidesWindow = ui.user_settings_get_entry('-iconHidesWindow-', True)
   songsDir = ui.user_settings_get_entry('-songsDir-', fileDir)
-  if keepOnTop is False:
-    window['Pin'].update(image_data=pinEnabledButton)
-  else:
-    window['Pin'].update(image_data=pinButton)
   while True:
     windows, event, values = ui.read_all_windows(timeout=1000)
 
@@ -193,6 +189,10 @@ if __name__ == "__main__":
       if event in (ui.WIN_CLOSED, 'Exit'):
         tray.close()
         break
+    if keepOnTop is False:
+      window['Pin'].update(image_data=pinButton)
+    else:
+      window['Pin'].update(image_data=pinEnabledButton)
     if event == 'Pin':
       if keepOnTop is False:
         keepOnTop = True
@@ -412,6 +412,7 @@ if __name__ == "__main__":
           ui.user_settings_set_entry('-iconHidesWindow-', values['-userIconHidesWindowCB-'])
           ui.user_settings_set_entry('-songsDir-', values['-userSongsDirInput-'])
           ui.user_settings_set_entry('-volume-', volume)
+          SongsXML = loadSongs(ui.user_settings_get_entry('-songsDir-', fileDir))
           settingsWindow.close()
           tray = trayIcon(window)
           settingsWindow = None
