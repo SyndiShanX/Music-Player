@@ -42,7 +42,7 @@ def drawSettingsMenu():
             [ui.Text('Songs Folder:'), ui.Input(ui.user_settings_get_entry('-songsDir-', fileDir), enable_events=True, key='-userSongsDirInput-')],
             [ui.Button('Save', border_width=0, button_color='#404040', mouseover_colors='#404040')]]
 
-  return ui.Window('Music Player Settings', layout, size=(400, 300), use_custom_titlebar=True, keep_on_top=True,
+  return ui.Window('Music Player Settings', layout, size=(325, 300), use_custom_titlebar=True, keep_on_top=True,
                    titlebar_icon=small_icon, titlebar_background_color='#333333', element_justification='center').Finalize()
 
 
@@ -52,9 +52,9 @@ def drawMusicPlayer():
   userVolume = userVolume * 100
   sideButtons = [[ui.Button(key='Settings', image_data=settingsButton, pad=0, border_width=0, button_color='#404040', mouseover_colors='#404040')],
                  [ui.Button(key='Pin', image_data=pinButton, pad=((0, 0), (8, 0)), border_width=0, button_color='#404040', mouseover_colors='#404040')]]
-  layout = [[ui.Image(source=defaultArtwork, size=(128, 128), pad=((100, 0), (0, 0)), key='Artwork'),
+  layout = [[ui.Image(source=defaultArtwork, size=(128, 128), pad=((85, 0), (0, 0)), key='Artwork'),
              ui.Slider(range=(0, 100), default_value=userVolume, resolution=1, key='volume', enable_events=True, orientation='v', size=(7, 5)),
-             ui.Column(sideButtons, pad=((50, 0), (0, 100)), size=(20, 48))],
+             ui.Column(sideButtons, pad=((25, 0), (0, 100)), size=(20, 48))],
             [ui.Text('0:00', key='currentSongDuration', auto_size_text=True),
              ui.ProgressBar(1, orientation='h', size=(20, 5), bar_color=('#ffffff', '#5C5C5C'), pad=(0, 5), key='progress'),
              ui.Text('0:00', key='totalSongDuration', auto_size_text=True)],
@@ -66,7 +66,7 @@ def drawMusicPlayer():
             [ui.Text('Music Player', justification='left', key='songName', pad=(0, 0), auto_size_text=True)],
             [ui.Text('SyndiShanX', justification='left', key='artistName', pad=(0, 0), auto_size_text=True)]]
 
-  return ui.Window('Music Player', layout, size=(400, 300), use_custom_titlebar=True, keep_on_top=userKeepOnTop,
+  return ui.Window('Music Player', layout, size=(325, 300), use_custom_titlebar=True, keep_on_top=userKeepOnTop,
                    titlebar_icon=small_icon, icon=icon, titlebar_background_color='#333333', element_justification='center').Finalize()
 
 def loadSongs(dirName):
