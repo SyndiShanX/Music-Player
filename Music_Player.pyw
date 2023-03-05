@@ -56,7 +56,7 @@ def drawMusicPlayer():
              ui.Slider(range=(0, 100), default_value=userVolume, resolution=1, key='volume', enable_events=True, orientation='v', size=(7, 5)),
              ui.Column(sideButtons, pad=((25, 0), (0, 100)), size=(20, 48))],
             [ui.Text('0:00', key='currentSongDuration', auto_size_text=True),
-             ui.ProgressBar(1, orientation='h', size=(20, 5), bar_color=('#ffffff', '#5C5C5C'), pad=(0, 5), key='progress'),
+             ui.ProgressBar(1, orientation='h', size=(18, 5), bar_color=('#ffffff', '#5C5C5C'), pad=(0, 5), key='progress'),
              ui.Text('0:00', key='totalSongDuration', auto_size_text=True)],
             [ui.Button(key='Shuffle', image_data=shuffleButton, border_width=0, button_color='#404040', mouseover_colors='#404040'),
              ui.Button(key='Previous', image_data=prevButton, border_width=0, button_color='#404040', mouseover_colors='#404040'),
