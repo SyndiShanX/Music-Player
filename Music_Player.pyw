@@ -301,8 +301,12 @@ if __name__ == "__main__":
         else:
           songDuration = linearSong(songNum)
       isDraggableSong = False
-      isSongPlaying = True
-      isSongPaused = False
+      if isSongPaused is True:
+        mixer.music.pause()
+        window['Play'].update(image_data=playButton)
+      else:
+        isSongPlaying = True
+        isSongPaused = False
       progressBar(songDuration)
     if event == 'Next':
       if firstTimePlaying is True:
@@ -335,8 +339,12 @@ if __name__ == "__main__":
         else:
           songDuration = linearSong(songNum)
       isDraggableSong = False
-      isSongPlaying = True
-      isSongPaused = False
+      if isSongPaused is True:
+        mixer.music.pause()
+        window['Play'].update(image_data=playButton)
+      else:
+        isSongPlaying = True
+        isSongPaused = False
       progressBar(songDuration)
     if event == 'Shuffle':
       if isShuffleEnabled is True:
