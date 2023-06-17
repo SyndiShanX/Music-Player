@@ -206,7 +206,7 @@ if __name__ == "__main__":
         window.TKroot.wm_attributes("-topmost", keepOnTop)
     if firstTimePlaying is True:
       if len(sys.argv) >= 2:
-        SongsXML = loadSongs(fileDir)
+        SongsXML = loadSongs(ui.user_settings_get_entry('-songsDir-', fileDir))
         mixer.init()
         if windows == window:
           changeVolume(volume)
@@ -217,7 +217,7 @@ if __name__ == "__main__":
         isSongPaused = False
         window['Play'].update(image_data=pauseButton)
       else:
-        SongsXML = loadSongs(songsDir)
+        SongsXML = loadSongs(ui.user_settings_get_entry('-songsDir-', fileDir))
     if isSongPaused is False:
       window['Play'].update(image_data=pauseButton)
     else:
@@ -420,7 +420,24 @@ if __name__ == "__main__":
           ui.user_settings_set_entry('-iconHidesWindow-', values['-userIconHidesWindowCB-'])
           ui.user_settings_set_entry('-songsDir-', values['-userSongsDirInput-'])
           ui.user_settings_set_entry('-volume-', volume)
-          SongsXML = loadSongs(ui.user_settings_get_entry('-songsDir-', fileDir))
+          if ui.user_settings_get_entry('-songsDir-') != fileDir:
+            SongsXML = loadSongs(ui.user_settings_get_entry('-songsDir-', fileDir))
+            songsDir = ui.user_settings_get_entry('-songsDir-', fileDir)
+            songsNum = len(SongsXML) - 1
+            shuffleList = []
+            for x in range(0, songsNum):
+              randomNum = random.randint(1, songsNum)
+              if randomNum in shuffleList:
+                isNumUnique = False
+              else:
+                isNumUnique = True
+              while not isNumUnique:
+                if randomNum in shuffleList:
+                  isNumUnique = False
+                  randomNum = random.randint(1, songsNum)
+                else:
+                  isNumUnique = True
+              shuffleList.append(randomNum)
           settingsWindow.close()
           tray = trayIcon(window)
           settingsWindow = None
