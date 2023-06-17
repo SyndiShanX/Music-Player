@@ -1,4 +1,4 @@
-# Music-Player
+# Music Player
 
 Custom Music Player written in Python that Plays MP3 Files from a Folder
 
